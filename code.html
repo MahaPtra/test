@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Koleksi Data Etis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .data-box {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .permission-bar {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        #map {
+            height: 300px;
+            background-color: #eee;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Demo Koleksi Data dengan Persetujuan</h1>
+        
+        <div class="permission-bar">
+            <p>Aplikasi ini membutuhkan persetujuan Anda untuk mengakses:</p>
+            <input type="checkbox" id="geoPermission"> Lokasi geografis<br>
+            <input type="checkbox" id="devicePermission"> Info perangkat<br>
+            <button id="grantBtn">Berikan Akses</button>
+        </div>
+
+        <div class="data-box">
+            <h3>Informasi yang Dikumpulkan:</h3>
+            <p><strong>Waktu Akses:</strong> <span id="timeData">-</span></p>
+            <p><strong>Lokasi:</strong> <span id="geoData">-</span></p>
+            <p><strong>Perangkat:</strong> <span id="deviceData">-</span></p>
+            <div id="map"></div>
+        </div>
+
+        <button id="refreshBtn">Refresh Data</button>
+    </div>
+
+    <script>
+        document.getElementById('grantBtn').addEventListener('click', function() {
+            const geoChecked = document.getElementById('geoPermission').checked;
+            const deviceChecked = document.getElementById('devicePermission').checked;
+
+            if (!geoChecked && !deviceChecked) {
+                alert('Silakan pilih setidaknya satu izin');
+                return;
+            }
+
+            if (geoChecked) {
+                requestGeolocation();
+            }
+
+            if (deviceChecked) {
+                showDeviceInfo();
+            }
+
+            document.getElementById('timeData').textContent = new Date().toLocaleString();
+        });
+
+        function requestGeolocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        document.getElementById('geoData').textContent = 
+                            `Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`;
+                        
+                        // Simulasi tampilan peta (tidak benar-benar memanggil API Maps)
+                        const mapDiv = document.getElementById('map');
+                        mapDiv.innerHTML = `
+                            <img src="https://placehold.co/600x300?text=Peta+Area+Sekitar" 
+                                 alt="Peta area sekitar mengikuti koordinat pengguna" 
+                                 style="width:100%;border-radius:4px;">
+                            <p class="map-text">Lokasi Anda: ${lat.toFixed(4)}, ${lon.toFixed(4)}</p>
+                        `;
+                    },
+                    function(error) {
+                        document.getElementById('geoData').textContent = 
+                            'Izin lokasi ditolak atau tidak tersedia';
+                    }
+                );
+            } else {
+                document.getElementById('geoData').textContent = 
+                    'Geolokasi tidak didukung browser ini';
+            }
+        }
+
+        function showDeviceInfo() {
+            const deviceInfo = `
+                ${navigator.userAgent.split('(')[1].split(')')[0]}, 
+                ${screen.width}x${screen.height} pixels,
+                ${navigator.hardwareConcurrency || 'Unknown'} core CPU`;
+            
+            document.getElementById('deviceData').textContent = deviceInfo;
+        }
+
+        document.getElementById('refreshBtn').addEventListener('click', function() {
+            document.getElementById('timeData').textContent = new Date().toLocaleString();
+        });
+    </script>
+</body>
+</html>
